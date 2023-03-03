@@ -50,4 +50,4 @@ int length = InputValue("Длина массива: ");
 int[] array = GenerateArray(length);
 int CountEven = EvenCount(array);
 PrintArray(array);
-System.Console.WriteLine($"Количество четныйх элементов в массиве равно {CountEven}");
+System.Console.WriteLine($"Количество четных элементов в массиве равно {CountEven}");
