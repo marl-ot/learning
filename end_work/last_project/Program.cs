@@ -6,3 +6,20 @@
 string[] strings1 = {"hello", "2", "world", ":-)"};
 string[] strings2 = {"1234", "1567", "-2", "computer science"};
 string[] strings3 = {"Russia", "Denmark", "Kazan"};
+
+void StringsResilt(string[] strings)
+{
+    string[] result = {};
+
+    Console.Write("[");
+    for (int i = 0; i < strings.Length; i++)
+    {
+        if (strings[i].Length < 4)
+        {
+            Console.Write($"'{strings[i]}',");
+        }
+    }
+    Console.Write("]");
+}
+
+StringsResilt(strings3);
