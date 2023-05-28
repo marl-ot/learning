@@ -61,7 +61,7 @@ def replace_data():
 
 
 while True:
-    print("1. вывод \n2. добавление \n3. поиск \n4. поиск с изменением")
+    print("1. вывод \n2. добавление \n3. поиск \n4. изменение через поиск")
     mode = int(input("Выберите режим: "))
     if mode == 1:
         print(show_data())
@@ -69,8 +69,8 @@ while True:
         print(add_data())
     elif mode == 3:
         print(find_data())
-    # elif mode == 4:
-    #     best_filter()
+    elif mode == 4:
+        print(replace_data())
     else:
         print('Указан несуществующий режим')
         break
