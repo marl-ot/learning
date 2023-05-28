@@ -7,23 +7,24 @@
 # Вызвать поиск, найти единственное вхождение и его менять.
 
 
-def show_data():
+def show_data(file_name):
     """Выводит информацию из справочника"""
-    with open('book.txt', 'r', encoding='utf-8') as book:
+    with open(f'{str(file_name)}', 'r', encoding='utf-8') as book:
         return book.read()
 
 
-def add_data():
+def add_data(file_name):
     """Добавляет информацию в справочник."""
     fio = input('Введите ФИО: ')
     phone_num = input('Введите номер телефона: ')
-    with open('book.txt', 'a', encoding='utf-8') as book:
-        return book.write(f'\n{fio} | {phone_num}')
+    with open(f'{str(file_name)}', 'a', encoding='utf-8') as book:
+        book.write(f'\n{fio} | {phone_num}')
+    return print(f'Добавлен пользователь {fio} | {phone_num}')
 
 
-def find_data():
+def find_data(file_name):
     """Печатает результат поиска по справочнику."""
-    with open('book.txt', 'r', encoding='utf-8') as book:
+    with open(f'{str(file_name)}', 'r', encoding='utf-8') as book:
         data = book.read()
     context_to_find = input('Введите, что хотите найти: ')
     result = search(data, context_to_find)
@@ -36,11 +37,10 @@ def search(book, info):
     return list(filter(lambda context: info.lower() in context.lower(), book))
 
 
-def replace_data():
+def replace_data(file_name):
     """Удаляет строку с данными в справочнике"""       
-    rd_book = open('book.txt', 'r', encoding='utf-8')
-    data = show_data()
-    print(data)
+    rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
+    data = show_data(f'{str(file_name)}')
     context_to_change = input('Введите, что хотите заменить: ')
     while True:
         srch = search(data, context_to_change)
@@ -55,50 +55,60 @@ def replace_data():
         else:
             break
     rd_book.close()
-    wrt_book = open('book.txt', 'w', encoding='utf-8')
+    wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
     wrt_book.write(data)
     wrt_book.close()
     return data
 
 
-def delete_data():
+def delete_data(file_name):
     """Удаляет строку с данными в справочнике"""       
-    rd_book = open('book.txt', 'r', encoding='utf-8')
-    data = show_data()
+    rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
+    data_lines = rd_book.readlines()
+    data = show_data('book.txt')
+    print('Выберите режим: \n1. удалить часть строки \n2. удалить всю строку')
+    mod = int(input("Введите необходимый режим: "))
     context_to_del = input('Введите, что хотите удалить: ')
+    wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
     while True:
         srch = search(data, context_to_del)
         if len(srch) == 1:
-            data = data.replace(context_to_del, '')
-            break
+            if mod == 1:
+                data = data.replace(context_to_del, '')
+                wrt_book.write(data)
+                break
+            elif mod == 2:
+                for line in data_lines:
+                    if context_to_del not in line:
+                        wrt_book.write(line)
+                break
+            else:
+                print('Введен несуществующий режим')
+                break
         elif len(srch) > 1:
             context_to_del = input('Слишком много вхождений. \nСкорректируйте заменяемую информацию: ')
         elif len(srch) == 0:
             context_to_del = input('Нет вхождений. \nСкорректируйте заменяемую информацию: ')
         else:
             break
-
-    rd_book.close()
-    wrt_book = open('book.txt', 'w', encoding='utf-8')
-    wrt_book.write(data)
-    wrt_book.close()
-
-    return data
+        rd_book.close()
+        wrt_book.close()
+    return 0
 
 
 while True:
     print("1. вывод \n2. добавление \n3. поиск \n4. изменение через поиск \n5. удаление записей \n6. выход")
     mode = int(input("Выберите режим: "))
     if mode == 1:
-        print(show_data())
+        print(show_data('book.txt'))
     elif mode == 2:
-        print(add_data())
+        add_data('book.txt')
     elif mode == 3:
-        print(find_data())
+        print(find_data('book.txt'))
     elif mode == 4:
-        print(replace_data())
+        print(replace_data('book.txt'))
     elif mode == 5:
-        print(delete_data())
+        print(delete_data('book.txt'))
     elif mode == 6:
         break
     else:

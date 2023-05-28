@@ -1,3 +1,5 @@
+from (Task-38) import show_data, search
+
 # # создание файла
 # myfile = open("hello.txt", "w")
 
@@ -50,11 +52,78 @@
     
 #     return wrt_book
 
-
-# def search(book, info):
-#     """Находит в списке записи по определенному критерию поиска"""
-#     book = book.split('\n')
-#     return list(filter(lambda contact: info.lower() in contact.lower(), book))
-
-
 # replace_data()
+
+
+def delete_data(file_name):
+    """Удаляет строку с данными в справочнике"""       
+    rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
+    data_lines = rd_book.readlines()
+    data = show_data('book.txt')
+    print('Выберите режим: \n1. удалить часть строки \n2. удалить всю строку')
+    mod = int(input("Введите необходимый режим: "))
+    context_to_del = input('Введите, что хотите удалить: ')
+    while True:
+        srch = search(data, context_to_del)
+        if len(srch) == 1:
+            if mod == 1:
+                data = data.replace(context_to_del, '')
+                wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
+                wrt_book.write(data)
+                break
+            elif mod == 2:
+                wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
+                for line in data_lines:
+                    if context_to_del not in line:
+                        wrt_book.write(line)
+                        break
+            else:
+                print('Введен несуществующий режим')
+                break
+        elif len(srch) > 1:
+            context_to_del = input('Слишком много вхождений. \nСкорректируйте заменяемую информацию: ')
+        elif len(srch) == 0:
+            context_to_del = input('Нет вхождений. \nСкорректируйте заменяемую информацию: ')
+        else:
+            break
+        wrt_book.close()  
+    return 0
+
+
+def delete_data(file_name):
+    """Удаляет строку с данными в справочнике"""       
+    rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
+    data_lines = rd_book.readlines()
+    data = show_data('book.txt')
+    print('Выберите режим: \n1. удалить часть строки \n2. удалить всю строку')
+    mod = int(input("Введите необходимый режим: "))
+    context_to_del = input('Введите, что хотите удалить: ')
+    
+    while True:
+        if mod == 1:
+            srch = search(data, context_to_del)
+            if len(srch) == 1:
+                data = data.replace(context_to_del, '')
+                break
+            elif len(srch) > 1:
+                context_to_del = input('Слишком много вхождений. \nСкорректируйте заменяемую информацию: ')
+            elif len(srch) == 0:
+                context_to_del = input('Нет вхождений. \nСкорректируйте заменяемую информацию: ')
+            else:
+                break
+            rd_book.close()
+            wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
+            wrt_book.write(data)
+            wrt_book.close()
+        elif mod == 2:
+            wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
+            for line in data_lines:
+                if context_to_del not in line:
+                    wrt_book.write(line)
+            break
+        else:
+            print('Введен несуществующий режим')
+            break
+        
+        wrt_book.close()
+    return data
