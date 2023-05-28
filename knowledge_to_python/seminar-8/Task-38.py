@@ -7,22 +7,22 @@
 # Вызвать поиск, найти единственное вхождение и его менять.
 
 
-def show_data(file_name):
+def show_data(file_name) -> None:
     """Выводит информацию из справочника"""
     with open(f'{str(file_name)}', 'r', encoding='utf-8') as book:
         return book.read()
 
 
-def add_data(file_name):
+def add_data(file_name) -> None:
     """Добавляет информацию в справочник."""
     fio = input('Введите ФИО: ')
     phone_num = input('Введите номер телефона: ')
     with open(f'{str(file_name)}', 'a', encoding='utf-8') as book:
         book.write(f'\n{fio} | {phone_num}')
-    return print(f'Добавлен пользователь {fio} | {phone_num}')
+    return 0
 
 
-def find_data(file_name):
+def find_data(file_name) -> None:
     """Печатает результат поиска по справочнику."""
     with open(f'{str(file_name)}', 'r', encoding='utf-8') as book:
         data = book.read()
@@ -31,13 +31,13 @@ def find_data(file_name):
     return result
 
 
-def search(book, info):
+def search(book, info) -> list[str]:
     """Находит в списке записи по определенному критерию поиска"""
     book = book.split('\n')
     return list(filter(lambda context: info.lower() in context.lower(), book))
 
 
-def replace_data(file_name):
+def replace_data(file_name) -> None:
     """Удаляет строку с данными в справочнике"""       
     rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
     data = show_data(f'{str(file_name)}')
@@ -58,10 +58,10 @@ def replace_data(file_name):
     wrt_book = open(f'{str(file_name)}', 'w', encoding='utf-8')
     wrt_book.write(data)
     wrt_book.close()
-    return data
+    return 0
 
 
-def delete_data(file_name):
+def delete_data(file_name) -> None:
     """Удаляет строку с данными в справочнике"""       
     rd_book = open(f'{str(file_name)}', 'r', encoding='utf-8')
     data_lines = rd_book.readlines()
@@ -106,9 +106,9 @@ while True:
     elif mode == 3:
         print(find_data('book.txt'))
     elif mode == 4:
-        print(replace_data('book.txt'))
+        replace_data('book.txt')
     elif mode == 5:
-        print(delete_data('book.txt'))
+        delete_data('book.txt')
     elif mode == 6:
         break
     else:
