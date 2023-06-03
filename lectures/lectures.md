@@ -1298,8 +1298,387 @@ Alias (псевдоним) — альтернативное имя, которо
 Библиотека seaborn без труда принимает pandas DataFrame(таблицу). Чтобы изобразить отношения между
 двумя столбцами достаточно указать, какой столбец отобразить по оси x, а какой по оси y.
 
+## 6. Знакомство с языком программирвоания Java
+***
 
-## 6. Алгоритмы и структуры данных
+Почему Java?
+- Топ 3 ЯП
+- Множество библиотек
+- Кроссплатформенность
+- Множество вакансий
+- База нативной разработки под Android
+- Безопасность
+- ООП
+- Многопоточность
+
+Типы данных:
+1. Ссылочные (массивы)
+2. Примитивные (boolean, int, short, long, float, double, Char)
+
+Существует неявная типизация - тип данных **var**
+
+### Классы-обертки:
+
+|Примитив|Обертка  |
+|--------|:-------:|
+|int     |Integer  |
+|short   |Short    |
+|long    |Long     |
+|byte    |Byte     |
+|float   |Float    |
+|double  |Double   |
+|char    |Character|
+|boolean |Boolean  |
+
+Классы обертки используются для обращения к внутренним функциям языка java (тонкости)
+
+Операции:
+- Присваивание: =
+- Арифметические: *, /, +, -, %, ++, --
+- Операции сравнения: <, >, ==, !=, >=, <=
+- Логические операции: ||, &&, ^, ! (конъюнкция, дизъюнкция, разделительная дизъюнкция, инверсия)
+- Побитовые операции: <<, >> &, |, ^ (побитовые сдвиги,)
+
+### Постфиксный инкремент: 
+    int a = 123;
+    System.out.println(a++);
+    System.out.println(a);
+
+    // output:
+    // 123
+    // 124
+    // (приоритет ++ ниже, чем приоритет вывода в консоль)
+
+### Префиксный инкремент: 
+    int a = 123;
+    System.out.println(++a);
+    System.out.println(a);
+
+    // output:
+    // 124
+    // 124
+    // (приоритет ++ выше, чем приоритет вывода в консоль)
+
+Разница между && и &, а также || и | следующая:
+
+&& и || говорят, что если одно из выражений ложное, то нет смысла 
+рассматривать последующие выражения (поэтому их называют быстрыми).
+
+А & и | проверяют обе части выражения
+
+### Синтаксис одномерных массивов
+
+    public class Program {
+        public static void main(String[] args) {
+            int[] arr = new int[10];
+            System.out.println(arr.length); // 10
+
+            arr = new int[] { 1, 2, 3, 4, 5 };
+            System.out.println(arr.length); // 5
+        }
+    }
+
+### Синтаксис многомерных массивов
+
+    // двумерные массивы
+    public class Program {
+        public static void main(String[] args) {
+            int[] arr[] = new int[3][5];
+            for (int[] line : arr) {
+                for (int item : line) {
+                    System.out.printf("%d ", item);
+                }
+            System.out.println();
+            }
+        }
+    }
+
+    // массивы массивов*
+    public class Program {
+        public static void main(String[] args) {
+            int[][] arr = new int[3][5];
+
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < arr[i].length; j++) {
+                    System.out.printf("%d ", arr[i][j]);
+                }
+            System.out.println();
+            }
+        }
+    }
+
+### Неявные преобразования примитивов
+
+![Преобразования примитивов](./images/primitive_transformations.png)
+
+    public class Program {
+        public static void main(String[] args) {
+            int i = 123; double d = i;
+            System.out.println(i); // 123
+            System.out.println(d); // 123.0
+            d = 3.1415; i = (int)d;
+            System.out.println(d); // 3.1415
+            System.out.println(i); // 3
+            d = 3.9415; i = (int)d;
+            System.out.println(d); // 3.9415
+            System.out.println(i); // 3
+            byte b = Byte.parseByte("123");
+            System.out.println(b); // 123
+            b = Byte.parseByte("1234");
+            System.out.println(b); // NumberFormatException: Value out of range
+        }
+    }
+
+### Получение данных из терминала
+
+    import java.util.Scanner;
+        public class Program {
+            public static void main(String[] args) {
+            Scanner iScanner = new Scanner(System.in);
+            System.out.printf("name: ");
+            String name = iScanner.nextLine();
+            System.out.printf("Привет, %s!", name);
+            iScanner.close();
+        }
+    }
+
+    Для примитив
+    import java.util.Scanner;
+        public class Program {
+            public static void main(String[] args) {
+            Scanner iScanner = new Scanner(System.in);
+            System.out.printf("int a: ");
+            int x = iScanner.nextInt();
+            System.out.printf("double a: ");
+            double y = iScanner.nextDouble();
+            System.out.printf("%d + %f = %f", x, y, x + y);
+            iScanner.close();
+        }
+    }
+
+    Проверка валидности данных
+
+    import java.util.Scanner;
+        public class Program {
+            public static void main(String[] args) {
+            Scanner iScanner = new Scanner(System.in);
+            System.out.printf("int a: ");
+            boolean flag = iScanner.hasNextInt();
+            System.out.println(flag);
+            int i = iScanner.nextInt();
+            System.out.println(i);
+            iScanner.close();
+        } 
+    }
+
+### Форматированный вывод
+
+    public class Program {
+        public static void main(String[] args) {
+            int a = 1, b = 2;
+            int c = a + b;
+            String res = a + " + " + b + " = " + c;
+            System.out.println(res);
+        }
+    }
+
+    public class Program {
+        public static void main(String[] args) {
+            int a = 1, b = 2;
+            int c = a + b;
+            String res = String.format("%d + %d = %d \n", a, b, c);
+            System.out.printf("%d + %d = %d \n", a, b, c);
+            System.out.println(res);
+        }
+    }
+
+Виды спецификаторов:
+- %d: целочисленных значений
+- %x: для вывода шестнадцатеричных чисел
+- %f: для вывода чисел с плавающей точкой
+- %e: для вывода чисел в экспоненциальной форме, например, 3.1415e+01
+- %c: для вывода одиночного символа
+- %s: для вывода строковых значений
+***
+    public class Program {
+        public static void main(String[] args) {
+            float pi = 3.1415f;
+            System.out.printf("%f\n", pi); // 3,141500
+            System.out.printf("%.2f\n", pi); // 3,14
+            System.out.printf("%.3f\n", pi); // 3,141
+            System.out.printf("%e\n", pi); // 3,141500e+00
+            System.out.printf("%.2e\n", pi); // 3,14e+00
+            System.out.printf("%.3e\n", pi); // 3,141e+00
+        }
+    }
+
+### Область видимости переменных
+
+У переменных существует понятие «область видимости».
+Если переменную объявили внутри некоторого блока фигурных скобок { },
+то снаружи этого блока переменная будет недоступна.
+
+    public class Program {
+        public static void main(String[] args) {
+            {
+                int i = 123;
+                System.out.println(i);
+            }
+            System.out.println(i); // error: cannot find symbol
+        }
+    }
+
+### Управляющие конструкции
+    
+    public class Program {
+            public static void main(String[] args) {
+            int a = 1;
+            int b = 2;
+            int min = a < b ? a : b; // Тернарный оператор
+            System.out.println(min);
+        }
+    }
+
+### Оператор вывода
+
+    import java.util.Scanner;
+    public class Program {
+        public static void main(String[] args) {
+            int mounth = value;
+            String text = "";
+            switch (mounth) {
+            case 1:
+            text = "Autumn";
+            break;
+            ...
+            default:
+            text = "mistake";
+            break;
+            }
+            System.out.println(text);
+            iScanner.close();
+        }
+    }
+
+### Циклы
+
+    // while
+    public class Program {
+        public static void main(String[] args) {
+            int value = 321;
+            int count = 0;
+            while (value != 0) {
+                value /= 10;
+                count++;
+            }
+            System.out.println(count);
+        }
+    }
+
+    // do while
+    public class Program {
+        public static void main(String[] args) {
+            int value = 321;
+            int count = 0;
+            do {
+                value /= 10;
+                count++;
+            } while (value != 0);
+            System.out.println(count);
+        }
+    }
+
+    // for
+    public class Program {
+        public static void main(String[] args) {
+            int s = 0;
+            for (int i = 1; i <= 10; i++) {
+                s += i;
+            }
+            System.out.println(s);
+        }
+    }
+
+    // Вложенные циклы
+    public class Program {
+            public static void main(String[] args) {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        System.out.print("* ");
+                    }
+                System.out.println();
+            }
+        // * * * * *
+        // * * * * *
+        // * * * * *
+        // * * * * *
+        // * * * * *
+        }
+    }
+
+    // for для коллекций данных
+    public class Program {
+        public static void main(String[] args) {
+            int arr[] = new int[10];
+            for (int item : arr) {
+                System.out.printf("%d ", item);
+            }
+            System.out.println();
+        }
+    }
+
+### Работа с файлами
+
+    // Создание и запись\ дозапись
+    import java.io.FileWriter;
+    import java.io.IOException;
+    public class Program {
+        public static void main(String[] args) {
+            try (FileWriter fw = new FileWriter("file.txt", false)) {
+                fw.write("line 1");
+                fw.append('\n');
+                fw.append('2');
+                fw.append('\n');
+                fw.write("line 3");
+                fw.flush();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    // Чтение, Вариант посимвольно
+    import java.io.*;
+    public class Program {
+        public static void main(String[] args) throws Exception {
+            FileReader fr = new FileReader("file.txt");
+            int c;
+            while ((c = fr.read()) != -1) {
+                char ch = (char) c;
+                if (ch == '\n') {
+                    System.out.print(ch);
+                } else {
+                    System.out.print(ch);
+                }
+            }
+        }   
+    }
+
+    // Чтение, Вариант построчно
+    import java.io.*;
+    public class Program {
+        public static void main(String[] args) throws Exception {
+            BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+            String str;
+            while ((str = br.readLine()) != null) {
+                System.out.printf("== %s ==\n", str);
+            }
+            br.close();
+        }
+    }
+
+
+## 7. Алгоритмы и структуры данных
 ***
 ### ***Алгоритмы***
 
