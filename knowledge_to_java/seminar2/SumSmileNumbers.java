@@ -28,7 +28,7 @@ public class SumSmileNumbers {
         System.out.println("Сумма простых чисел: " + sum);
     }
 
-    // Метод для проверки, является ли число простым
+    // Простое число?
     public static boolean isPrime(int number) {
         if (number <= 1) {
             return false;
