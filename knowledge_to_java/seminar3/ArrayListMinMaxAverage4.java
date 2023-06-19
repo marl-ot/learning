@@ -1,5 +1,7 @@
 package knowledge_to_java.seminar3;
 
+// Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка.
+
 import java.util.ArrayList;
 
 public class ArrayListMinMaxAverage4 {

@@ -1,5 +1,8 @@
 package knowledge_to_java.seminar3;
 
+// Сведения о товаре состоят из наименования, страны-производителя, веса, цены, сорта. 
+// Получить наименования товаров заданного сорта с наименьшей ценой.
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
