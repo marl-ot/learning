@@ -7,18 +7,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<String> history = new ArrayList<>();
-        Game game = new RusWordGame(); // Изменено на общий тип Game
+        Game game = new NumWordGame(); // Изменено на общий тип Game
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Выберите язык игры: (1 - русский, 2 - английский)");
+        System.out.println("Выберите язык игры: (1 - цифры, 2 - английский)");
         int languageChoice = scanner.nextInt();
         if (languageChoice == 1) {
-            game = new RusWordGame();
+            game = new NumWordGame();
         } else if (languageChoice == 2) {
             game = new EnWordGame();
         } else {
             System.out.println("Неправильный выбор языка. Игра будет запущена с русским языком.");
-            game = new RusWordGame();
+            game = new NumWordGame();
         }
 
         System.out.println("Введите размер слова:");
