@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Страница</title>
+</head>
+<body>
+    <h1>Привет! Введите ваше имя:</h1>
+    <input type="text" id="nameInput">
+    <button onclick="showName()">Показать имя</button>
+    <p id="nameOutput"></p>
+
+    <h1>Введите ваш возраст:</h1>
+    <button onclick="askAge()">Показать возраст</button>
+
+    <p id="elementToChange">Это элемент, который будет меняться при нажатии. Нажми на меня.</p>
+
+
+    <script>
+        // Задание 1
+        function showName() {
+            const nameInput = document.getElementById("nameInput");
+            const nameOutput = document.getElementById("nameOutput");
+            nameOutput.textContent = `Ваше имя: ${nameInput.value}`;
+        }
+
+        // Задание 2
+        function askAge() {
+            let age = prompt("Введите ваш возраст:");
+            if (age !== null) {
+                switch (true) {
+                    case age <= 0:
+                        alert("Ошибка! Введите корректный возраст");
+                        break;
+                    case age < 18:
+                        alert("Вы еще слишком молоды, не трать время на пустяки");
+                        break;
+                    case age >= 18 && age < 60:
+                        alert("Вы в самом быстром возрасте");
+                        break;
+                    default:
+                        alert("Пенсия");
+                }
+            }
+        }
+
+        // Доп задание - меняем цвет и текст одного элемента <p>
+        const elementToChange = document.getElementById("elementToChange");
+        elementToChange.addEventListener("click", () => {
+            elementToChange.style.color = getRandomColor();
+            elementToChange.textContent = "Цвет и текст изменены!";
+        });
+
+        // Генерируем случайный цвет в формате #RRGGBB
+        function getRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
