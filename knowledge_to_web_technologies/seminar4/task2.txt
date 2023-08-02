@@ -1,0 +1,14 @@
+-- Создаем таблицу EMPLOYEE с полями id, name, age, address
+CREATE TABLE EMPLOYEE (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age TEXT NOT NULL,
+    address TEXT NOT NULL
+);
+
+-- Вставляем данные в таблицу EMPLOYEE
+INSERT INTO EMPLOYEE VALUES (1, 'Иван', '18', 'Москва');
+INSERT INTO EMPLOYEE VALUES (2, 'Петр', '22', 'Иваново');
+INSERT INTO EMPLOYEE VALUES (3, 'Анна', '35', 'Питер');
+INSERT INTO EMPLOYEE VALUES (4, 'Юлия', '18', 'Москва');
+INSERT INTO EMPLOYEE VALUES (5, 'Николай', '36', 'Москва');
