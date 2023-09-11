@@ -65,9 +65,13 @@ file4 сохранит контент, но ссылка удалится
 Переместить ссылки в другую директорию.
 
     $ mv file2 cp_file
+
     $ mv file4 ln_file
 
     $ ln -s cp_file cp_slink_file
+
     $ ln -s ln_file ln_slink_file
+
     $ mkdir slink
-    $ mv *_slink_* ./slink/
+
+    $ mv \*\_slink\_\* ./slink/
