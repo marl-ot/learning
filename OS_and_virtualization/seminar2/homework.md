@@ -4,11 +4,15 @@
 Переименовать файл, дав ему новое имя.
 
     $ cat > file1
+
     file1 text
+
     ^D
 
     $ cat > file2
+
     file2 text
+    
     ^D
 
     $ cat file2 >> file1
