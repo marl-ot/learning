@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.page {
+    width: 1319px;
+    height: 928px;
+    background: #FFFFFF;
+}
+
+.center {
+    padding-left: calc(50% - 720px);
+    padding-right: calc(50% - 720px);
+}
+
+.menu_bar {
+    display: flex;
+    align-items: flex-start;
+    flex: content;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1%;
+    padding: 1%;
+}
+
+.menu_bar_logo {
+    display: flex;
+    flex: content;
+    gap: 1%;
+    flex-direction: row;
+    align-items: center;
+    width: 20%;
+    align-content: center;
+    justify-content: flex-start;
+    padding-left: 10%;
+}
+
+.menu_bar_logo_image {
+    height: auto;
+    width: 30%;
+}
+
+span {
+    color: #F25822;
+}
+
+.menu_bar_links {
+    display: flex;
+    flex: content;
+    flex-direction: row;
+    align-items: center;
+    gap: 8%;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('path-to-your-font/Gilroy-Medium.woff2') format('woff2'), url('path-to-your-font/Gilroy-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.menu_bar_link_1 {
+    color: #F25822;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_2 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_3 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_4 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_5 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_6 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_link_7 {
+    color: #000;
+    font-family: Gilroy-Medium, sans-serif;
+    ;
+}
+
+.menu_bar_links_get_started {
+    color: #FFFFFF;
+    background: #F25822;
+    border-radius: 30px;
+    border-width: 0;
+    width: 120px;
+    height: 40px;
+}
+
+.home {
+    display: flex;
+    flex: content;
+    flex-direction: row;
+    align-items: center;
+    gap: 1%;
+    margin: 1%;
+    padding: 1%;
+    width: 100%;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    gap: 1%;
+    margin: 1%;
+    padding: 1%;
+    width: 100%;
+}
+
+.home_meta {
+    width: 522px;
+    height: 374px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home_meta_header {
+    color: #000;
+    font-family: Gilroy-Bold;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 1%;
+    padding: 1%;
+}
+
+.home_meta_text_text {
+    color: #888;
+    font-family: Gilroy-Medium;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 1%;
+    padding: 1%;
+}
+
+.home_meta_media {
+    display: flex;
+    flex: content;
+    flex-direction: row;
+    gap: 20%;
+    align-items: center;
+    margin: 1%;
+    padding: 1%;
+}
+
+.home_meta_media_get_started {
+    color: #FFFFFF;
+    background: #F25822;
+    border-radius: 30px;
+    border-width: 0;
+    width: 120px;
+    height: 40px;
+}
+
+.home_meta_media_watch_video {
+    color: #AAA;
+    font-family: Gilroy-Bold;
+    white-space: nowrap;
+    display: flex;
+    flex: content;
+    flex-direction: row;
+    gap: 15px;
+    align-items: сenter;
+}
+
+.home_image {
+    width: auto;
+    height: auto;
+}
+
+.brand {
+    background: #FFFFFF;
+    display: flex;
+    flex: content;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: baseline;
+}
+
+.brand_logo {
+    width: auto;
+    height: auto;
+}
