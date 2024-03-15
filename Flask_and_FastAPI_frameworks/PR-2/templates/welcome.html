@@ -1,0 +1,16 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Приветствие
+{% endblock %}
+
+{% block header %}
+Приветствие
+{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать, {{ username }}!</h2>
+<form method="post" action="/logout/">
+    <input type="submit" value="Выйти">
+</form>
+{% endblock %}
