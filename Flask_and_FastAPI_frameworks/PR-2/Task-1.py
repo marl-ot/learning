@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, make_response
 
 app = Flask(__name__, template_folder='templates')
+app.secret_key = 'f3cfe9ed8fae309f02079dbf'
 
 
 @app.route('/')
@@ -11,6 +12,43 @@ def index():
                 'page_name': 'Главная'
               }
     return render_template('index.html', **context)
+
+
+@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login.html/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        resp = make_response(redirect(url_for('welcome')))
+        resp.set_cookie('username', username)
+        resp.set_cookie('email', email)
+        print("Куки установлены:", resp.headers.getlist('Set-Cookie'))
+        return resp
+    return render_template('login.html')
+
+
+@app.route('/welcome/')
+@app.route('/welcome.html/')
+def welcome():
+    username = request.cookies.get('username')
+    if username:
+        return render_template('welcome.html', username=username)
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/logout/', methods=['GET', 'POST'])
+@app.route('/logout.html/', methods=['GET', 'POST'])
+def logout():
+    if request.method == 'POST':
+        resp = make_response(redirect(url_for('login')))
+        resp.delete_cookie('username')
+        resp.delete_cookie('email')
+        print("Куки удалены:", resp.headers.getlist('Set-Cookie'))
+        return resp
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/shoes/')
