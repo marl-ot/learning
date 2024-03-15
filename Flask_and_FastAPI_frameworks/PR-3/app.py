@@ -1,6 +1,15 @@
-from flask import Flask, render_template
+import os
+from flask import Flask, render_template, redirect, url_for, request, session
+from models import db, User
+from flask_login import LoginManager, login_user, logout_user, current_user
+
 
 app = Flask(__name__, template_folder='templates')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite'
+app.config['SECRET_KEY'] = 'b1591b09c0a92eae5c1e26b6fd0523f5e3e340d18c662aff2d2aae1bc2844a14'
+login_manager = LoginManager()
+login_manager.init_app(app)
+db.init_app(app)
 
 
 @app.route('/')
@@ -8,9 +17,66 @@ app = Flask(__name__, template_folder='templates')
 @app.route('/index.html/')
 def index():
     context = {
-                'page_name': 'Главная'
-              }
+        'page_name': 'Главная',
+    }
     return render_template('index.html', **context)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+@app.cli.command("init-db")
+def init_db():
+    db.create_all()
+    print('status code: 200')
+
+
+@app.route('/register/', methods=['GET', 'POST'])
+@app.route('/register.html/', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        email = request.form['email']
+        password = request.form['password']
+        
+        new_user = User(first_name=first_name, last_name=last_name, email=email)
+        new_user.set_password(password)
+        
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('registration.html')
+
+
+@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login.html/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        
+        user = User.query.filter_by(email=email).first()
+        
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('index'))
+        else:
+            error_message = "Неправильный email или пароль. Попробуйте еще раз."
+            return render_template('login.html', error_message=error_message)
+    
+    return render_template('login.html')
+
+
+@app.route('/logout/')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 @app.route('/shoes/')
@@ -77,7 +143,3 @@ def contacts():
                'site': 'http://127.0.0.1:5000',
                'location': 'Москва, Россия'}
     return render_template('contacts.html', **context)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
