@@ -8,17 +8,13 @@ from enum import Enum as PyEnum
 import uuid
 from datetime import datetime
 
-# Создание экземпляра приложения FastAPI
 app = FastAPI()
 
-# Создание экземпляра базового класса для объявления моделей
 Base = declarative_base()
 
-# Создание подключения к базе данных SQLite
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-# Создание сессии для взаимодействия с базой данных
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_session():
@@ -28,7 +24,6 @@ def get_session():
     finally:
         db_session.close()
 
-# Определение модели для таблицы "Пользователи"
 class User(Base):
     __tablename__ = "users"
 
@@ -38,10 +33,9 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     password = Column(String)
 
-    # Связь с таблицей "Заказы"
     orders = relationship("Order", back_populates="user")
 
-# Определение модели для таблицы "Товары"
+
 class Product(Base):
     __tablename__ = "products"
 
@@ -50,10 +44,9 @@ class Product(Base):
     description = Column(String)
     price = Column(Integer)
 
-    # Связь с таблицей "Заказы"
     orders = relationship("Order", back_populates="product")
 
-# Определение модели для таблицы "Заказы"
+
 class Order(Base):
     __tablename__ = "orders"
 
@@ -63,20 +56,19 @@ class Order(Base):
     date_ordered = Column(DateTime, default=datetime.utcnow)
     status = Column(Enum("pending", "processing", "completed", name="order_status"))
 
-    # Связь с таблицей "Пользователи"
     user = relationship("User", back_populates="orders")
-    # Связь с таблицей "Товары"
     product = relationship("Product", back_populates="orders")
 
-# Создание таблиц в базе данных
+
 Base.metadata.create_all(bind=engine)
 
-# Пишем модели Pydantic для каждой таблицы
+
 class UserCreate(BaseModel):
     first_name: str
     last_name: str
     email: str
     password: str
+
 
 class UserResponse(BaseModel):
     id: int
@@ -84,10 +76,12 @@ class UserResponse(BaseModel):
     last_name: str
     email: str
 
+
 class ProductCreate(BaseModel):
     name: str
     description: str
     price: int
+
 
 class ProductResponse(BaseModel):
     id: int
@@ -95,9 +89,11 @@ class ProductResponse(BaseModel):
     description: str
     price: int
 
+
 class OrderCreate(BaseModel):
     user_id: int
     product_id: int
+
 
 class OrderResponse(BaseModel):
     id: int
@@ -106,7 +102,7 @@ class OrderResponse(BaseModel):
     date_ordered: datetime
     status: str
 
-# Создание маршрутов для CRUD операций с каждой таблицей
+
 @app.post("/users/", response_model=UserResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_session)):
     db_user = User(**user.dict())
