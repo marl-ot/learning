@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block tittle %}Список заказанных товаров{% endblock tittle %}
+
+{% block body %}
+    <h1>Заказанные товары</h1>
+
+    <h2>За последние 7 дней</h2>
+    <ul>
+        {% for product in ordered_products_7_days %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>За последние 30 дней</h2>
+    <ul>
+        {% for product in ordered_products_30_days %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>За последний год</h2>
+    <ul>
+        {% for product in ordered_products_365_days %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock body %}
