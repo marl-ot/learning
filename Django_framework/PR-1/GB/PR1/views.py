@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import logging
 
-# Настройка логирования
 logging.basicConfig(filename='access.log', level=logging.INFO)
 
 def home(request):
@@ -12,7 +11,6 @@ def home(request):
     <p>Меня зовут, Святослав.</p>
     """
     
-    # Запись информации о посещении страницы в лог
     logging.info('Посещена главная страница')
     
     return HttpResponse(html)
@@ -23,8 +21,7 @@ def about(request):
     <p>Здесь вы можете узнать немного о мне.</p>
     <p>Меня зовут Святослав.</p>
     """
-    
-    # Запись информации о посещении страницы в лог
+
     logging.info('Посещена страница "О себе"')
     
     return HttpResponse(html)
