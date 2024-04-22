@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block tittle %}{% endblock tittle %}</title>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'home' %}">Главная</a></li>
+        <li><a href="{% url 'orders' %}">Список заказов</a></li>
+        <li><a href="{% url 'add_product' %}">Добавить товар</a></li>
+        <li><a href="/admin/">Панель администратора</a></li>
+    </ul>
+    {% block body %}{% endblock body %}
+</body>
+</html>
